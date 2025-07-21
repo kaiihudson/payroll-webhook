@@ -55,7 +55,7 @@ def parse_dataframe(file):
                 "reportedPrice" :row["Precio"],
                 "mainQuality": deal_with_qualities(row["Condición 1"]),
                 "alternateQuality": deal_with_qualities(row["Condición 2"]),
-                "source": row["Link Abugames"]
+                "source": row["Link Mint"]
             }
             container.append(new_item)
         bodies.append(container)
