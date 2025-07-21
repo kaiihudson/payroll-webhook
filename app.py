@@ -16,18 +16,14 @@ def webhook_receiver():
     bodies = parse_dataframe(file)
     # Keep the Identifier handy for the output request
     identifier = request.form['id']
-    if len(bodies) > 1:
-        for body in bodies:
-            x = post_items(body, identifier) 
-            continue
-    else:
-        x = post_items(bodies, identifier)       
-        return jsonify({"status": 200}), 200
+    
+    for body in bodies:
+        x = post_items(body, identifier) 
     return jsonify({"message": "webhook received succesfully"}), 200
 
 cardKingdom = ['CK', "CardKingdom", "CARDKINGDOM"]
 mintCard = ['MINT', 'MINTCARD']
-api = "http://backend:8080/api/v1/order"
+api = "http://localhost:8080/api/v1/order"
 
 
 def post_items(body, identifier):
@@ -48,7 +44,7 @@ def parse_dataframe(file):
         
         for index, row in df.iterrows():
             new_item = {
-                "retailer": key,
+                "retailer": "MINTCARD",
                 "responsible": row["Quien pide"],
                 "itemName" : row["Nombre de la carta"],
                 "quantity": row["Cantidad"],
